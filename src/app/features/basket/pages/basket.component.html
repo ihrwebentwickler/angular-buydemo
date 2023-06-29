@@ -1,1 +1,17 @@
-<p>basket works!</p>
+<h2>Warenkorb</h2>
+
+<div *ngIf="products$ | async as products">
+  <div *ngIf="products && products.length > 0; else emptyBasket">
+    <ul>
+      <li *ngFor="let product of products">
+        {{ product.name }} - {{ product.quantity }} Stück
+        <button (click)="decreaseQuantity(product)">-</button>
+        <button (click)="increaseQuantity(product)">+</button>
+        <button (click)="removeFromBasket(product)">Entfernen</button>
+      </li>
+    </ul>
+  </div>
+  <ng-template #emptyBasket>
+    <p>Der Warenkorb ist leer.</p>
+  </ng-template>
+</div>
